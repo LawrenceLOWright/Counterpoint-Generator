@@ -83,8 +83,8 @@ while (run == 0):
     print("")
 
     #Get user input for key
-    key = 1
-    #input("Enter 1 for C major, 2 for sharp keys, and 3 for flat keys. \n")
+
+    key = input("Enter 1 for C major, 2 for sharp keys, and 3 for flat keys. \n")
 
     print("")
     
@@ -451,17 +451,18 @@ while (run == 0):
             first_tritone = current_pitch
         
         #test for a 7th - if the absolute value last pitch + abs of current pitch = 6, it's a 7th
-        if (((last_pitch*last_pitch)/last_pitch) + ((current_pitch*current_pitch)/current_pitch) == 6):
-            old_rand_pitch = rand_pitch
-            
-            while (rand_pitch == old_rand_pitch):
-                rand_pitch = random.choice([0, 3, 3, 3, 3, 5, 5, 6, 6, 6, 6])
+        if (last_pitch != 0 and current_pitch != 0):
+            if (((last_pitch*last_pitch)/last_pitch) + ((current_pitch*current_pitch)/current_pitch) == 6):
+                old_rand_pitch = rand_pitch
                 
-            if (rand_direction  == 0):
-                current_pitch = pitches[i+1] + rand_pitch
-        
-            if (rand_direction  == 1):
-                current_pitch = pitches[i+1] - rand_pitch
+                while (rand_pitch == old_rand_pitch):
+                    rand_pitch = random.choice([0, 3, 3, 3, 3, 5, 5, 6, 6, 6, 6])
+                    
+                if (rand_direction  == 0):
+                    current_pitch = pitches[i+1] + rand_pitch
+            
+                if (rand_direction  == 1):
+                    current_pitch = pitches[i+1] - rand_pitch
         
         last_pitch = current_pitch
 
@@ -483,11 +484,6 @@ while (run == 0):
         print("")
         print("")
 
-    print("pitches: ", pitches)
-    if (c_or_c == 2):
-        print("fspitch: ", fs_pitches)
-    print("")
-    
     again = input("Generate another? 1 for yes and 2 to quit.\n")
 
     while (again.isdigit() == False or int(again) > 2 or int(again) < 1):
